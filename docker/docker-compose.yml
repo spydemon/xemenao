@@ -1,0 +1,41 @@
+# Should be used with the docker-base project that can be fetched here:
+# https://github.com/spydemon/docker-base
+version: '2.0'
+
+services:
+    db:
+        container_name: xemenao-db
+        environment:
+            - MYSQL_DATABASE=xemenao
+            - MYSQL_ROOT_PASSWORD=toor
+        expose:
+            - "3306"
+        hostname: xemenao-db
+        image: mariadb:10.4
+        ports:
+            - "3454:3306" #MySQL is bind to the port 3452 on the host.
+        networks:
+            - default
+        volumes:
+            - ./db/db:/var/lib/mysql
+    web:
+        container_name: xemenao-web
+        expose:
+            - "80"
+        environment:
+            - VIRTUAL_HOST=xemenao.local
+        hostname: xemenao-web
+        image: spydemon/php74-laravel:0.1
+        volumes:
+            - ./conf/env:/var/www/.env
+            - ..:/var/www
+            - home:/root
+        networks:
+            - base
+            - default
+volumes:
+    home:
+networks:
+    base:
+        external: true
+    default:

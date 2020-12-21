@@ -28,6 +28,7 @@ services:
         image: spydemon/php74-laravel:0.1
         volumes:
             - ./conf/env:/var/www/.env
+            - ./conf/env_dusk:/var/www/.env.dusk
             - ..:/var/www
             - home:/root
         networks:

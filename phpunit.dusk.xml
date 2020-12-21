@@ -10,7 +10,12 @@
          stopOnFailure="false">
     <testsuites>
         <testsuite name="Browser Test Suite">
-            <directory suffix="Test.php">./tests/Browser</directory>
+            <directory suffix="Test.php">./tests/Browser/Mobile</directory>
+            <directory suffix="Test.php">./tests/Browser/TabletPortrait</directory>
+            <directory suffix="Test.php">./tests/Browser/TabletLandscape</directory>
+            <directory suffix="Test.php">./tests/Browser/Desktop</directory>
+            <!-- For an unknown reason, chromedriver sometime segfault for wide desktop tests in no headless mode.  -->
+            <directory suffix="Test.php">./tests/Browser/WideDesktop</directory>
         </testsuite>
     </testsuites>
 </phpunit>
